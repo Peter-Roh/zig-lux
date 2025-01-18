@@ -1,6 +1,18 @@
 const std = @import("std");
+const builtin = @import("builtin");
 
-pub fn build(b: *std.Build) void {
+const min_zig_version = "0.13.0";
+
+const Build = blk: {
+    const current_zig = builtin.zig_version;
+    const min_zig = std.SemanticVersion.parse(min_zig_version) catch unreachable;
+    if (current_zig.order(min_zig) == .lt) {
+        @compileError(std.fmt.comptimePrint("Your Zig version {} does not meet the minimum build requirement of {}", .{ current_zig, min_zig }));
+    }
+    break :blk std.Build;
+};
+
+pub fn build(b: *Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
