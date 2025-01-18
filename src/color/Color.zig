@@ -1,6 +1,7 @@
 const std = @import("std");
+const vec = @import("../vec/vec.zig");
 
-const Color = @Vector(3, f64);
+const Color = vec.Vec3;
 
 pub fn writeColor(writer: std.io.AnyWriter, pixelColor: Color) !void {
     const r = pixelColor[0];

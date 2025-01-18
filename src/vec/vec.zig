@@ -2,7 +2,7 @@ const std = @import("std");
 const math = std.math;
 const testing = std.testing;
 
-const Vec3 = @Vector(3, f64);
+pub const Vec3 = @Vector(3, f64);
 
 pub fn lengthSquared(v: Vec3) f64 {
     return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
