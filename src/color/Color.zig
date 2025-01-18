@@ -1,12 +1,11 @@
 const std = @import("std");
-const Vec3 = @import("../vec3/Vec3.zig");
 
-const Color = Vec3;
+const Color = @Vector(3, f64);
 
 pub fn writeColor(writer: std.io.AnyWriter, pixelColor: Color) !void {
-    const r = pixelColor.x();
-    const g = pixelColor.y();
-    const b = pixelColor.z();
+    const r = pixelColor[0];
+    const g = pixelColor[1];
+    const b = pixelColor[2];
 
     const rbyte = @as(u8, @intFromFloat(r * 255.999));
     const gbyte = @as(u8, @intFromFloat(g * 255.999));
