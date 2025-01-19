@@ -17,6 +17,11 @@ pub fn unitVector(v: Vec3) Vec3 {
     return @Vector(3, f64){ v[0] / len, v[1] / len, v[2] / len };
 }
 
+pub fn dot(u: Vec3, v: Vec3) f64 {
+    const s = u * v;
+    return s[0] + s[1] + s[2];
+}
+
 pub fn cross(u: Vec3, v: Vec3) Vec3 {
     return @Vector(3, f64){
         u[1] * v[2] - u[2] * v[1],
@@ -36,6 +41,12 @@ pub fn print(v: Vec3) void {
 test "length of vector" {
     const u = @Vector(3, f64){ 3, 0, 4 };
     try testing.expectEqual(length(u), 5);
+}
+
+test "dot product" {
+    const u = @Vector(3, f64){ 1, 2, 3 };
+    const v = @Vector(3, f64){ 2, 3, 4 };
+    try testing.expectEqual(dot(u, v), 20);
 }
 
 test "cross product" {
