@@ -26,11 +26,11 @@ pub fn direction(self: Self) Vec3 {
 }
 
 pub fn at(self: Self, t: f64) point3 {
-    return self.orig + t * self.dir;
+    return self.orig + vec.scalar(self.dir, t);
 }
 
 pub fn ray_color(self: Self) color.Color {
     const unit_direction = vec.unitVector(self.direction());
     const t = 0.5 * (unit_direction[1] + 1.0);
-    return Vec3{ 1.0 - t, 1.0 - t, 1.0 - t } * color.Color{ 1.0, 1.0, 1.0 } + Vec3{ t, t, t } * color.Color{ 0.5, 0.7, 1.0 };
+    return vec.scalar(color.Color{ 1.0, 1.0, 1.0 }, 1.0 - t) + vec.scalar(color.Color{ 0.5, 0.7, 1.0 }, t);
 }

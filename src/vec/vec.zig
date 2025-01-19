@@ -25,6 +25,10 @@ pub fn cross(u: Vec3, v: Vec3) Vec3 {
     };
 }
 
+pub fn scalar(u: Vec3, t: f64) Vec3 {
+    return u * @as(Vec3, @splat(t));
+}
+
 pub fn print(v: Vec3) void {
     std.debug.print("{d} {d} {d}\n", .{ v[0], v[1], v[2] });
 }
@@ -42,4 +46,12 @@ test "cross product" {
     try testing.expectEqual(c[0], -1);
     try testing.expectEqual(c[1], 2);
     try testing.expectEqual(c[2], -1);
+}
+
+test "scalar multiplication" {
+    const u = Vec3{ 1, 2, 3 };
+    const v = scalar(u, 1.5);
+    try testing.expectEqual(v[0], 1.5);
+    try testing.expectEqual(v[1], 3);
+    try testing.expectEqual(v[2], 4.5);
 }
